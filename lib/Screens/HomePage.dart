@@ -1,3 +1,4 @@
+import 'package:countries/SharedPreferences.dart';
 import 'package:flutter/material.dart';
 import 'Countries.dart';
 import 'package:countries/DataBase.dart';
@@ -45,7 +46,16 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    callApi();
+    try {
+      if (!SharedPref.getApiCall()) {
+        callApi();
+        SharedPref.setApiCall();
+      }
+    } catch (e) {
+      callApi();
+      SharedPref.setApiCall();
+    }
+
     super.initState();
   }
 
@@ -118,7 +128,6 @@ Widget showCard(BuildContext context, String region) {
     color: Colors.white,
     child: ListTile(
       onTap: () {
-        print("Region pressed");
         Navigator.of(context).push(
             MaterialPageRoute(builder: (context) => CountriesView(region)));
       },

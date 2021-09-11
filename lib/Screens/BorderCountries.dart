@@ -49,10 +49,7 @@ class _BorderCountriesState extends State<BorderCountries> {
       body: FutureBuilder(
           future: cnts,
           builder: (context, snapshot) {
-            print("Future called");
             if (snapshot.connectionState == ConnectionState.done) {
-              print("Snapshot completed");
-              print(countries);
               return showRegions(countries);
             } else {
               return Container(

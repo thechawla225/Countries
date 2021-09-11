@@ -68,23 +68,17 @@ class Countries {
     var borderCountries =
         countryDetails[0].borders.substring(1, len - 1).split(',');
     for (i = 0; i < borderCountries.length; i++) {
-      print(borderCountries[i]);
       var mapsTemp = await db.query(table,
           columns: CountryFields.values,
           where: '${CountryFields.alpha3Code} = ?',
           whereArgs: [borderCountries[i].substring(1)]);
 
-      print(mapsTemp);
       List<Country> tempDetails =
           mapsTemp.map((json) => Country.fromJson(json)).toList();
       try {
         borders.add(tempDetails[0]);
-      } catch (e) {
-        print(e);
-      }
+      } catch (e) {}
     }
-    print("Inside readbycountry");
-    print(borders);
     return borders;
   }
 

@@ -1,8 +1,11 @@
+import 'package:countries/SharedPreferences.dart';
 import 'package:flutter/material.dart';
 import 'Screens/HomePage.dart';
 import 'package:splashscreen/splashscreen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedPref.init();
   runApp(MyApp());
 }
 
