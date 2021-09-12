@@ -58,6 +58,30 @@ Widget homeDrawer(BuildContext context) {
             ),
             SizedBox(height: 10),
             GestureDetector(
+              onTap: () {},
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.dark_mode,
+                    color: Colors.red,
+                    size: 30,
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Text(
+                    "Dark Mode",
+                    style: TextStyle(
+                        fontFamily: 'ProximaNova',
+                        fontSize: 20,
+                        fontWeight: FontWeight.w800,
+                        color: Colors.red),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 10),
+            GestureDetector(
               onTap: () {
                 return exitDialog(context);
               },

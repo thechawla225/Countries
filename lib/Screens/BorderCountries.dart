@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:countries/CountriesModel.dart';
 import 'package:countries/DataBase.dart';
 import 'package:countries/Widgets/HomeDrawer.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class BorderCountries extends StatefulWidget {
   final String country;
@@ -64,14 +65,31 @@ class _BorderCountriesState extends State<BorderCountries> {
 }
 
 Widget showRegions(List<Country> countries) {
-  if (countries.length == 0) {
+  try {
+    if (countries.length == 0) {
+      return Container(
+        child: Center(
+          child: Text(
+            "No neighbours found!",
+            style: TextStyle(
+              fontFamily: 'ProximaNova',
+              fontSize: 20,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+        ),
+      );
+    }
+  } catch (e) {
     return Container(
-      child: Text(
-        "Oops! looks like this country does not have any neighbours!",
-        style: TextStyle(
-          fontFamily: 'ProximaNova',
-          fontSize: 25,
-          fontWeight: FontWeight.w800,
+      child: Center(
+        child: Text(
+          "No neighbours found!",
+          style: TextStyle(
+            fontFamily: 'ProximaNova',
+            fontSize: 20,
+            fontWeight: FontWeight.w800,
+          ),
         ),
       ),
     );
@@ -124,6 +142,14 @@ Widget showCard(BuildContext context, Country country) {
           fontWeight: FontWeight.bold,
           fontSize: 18,
           fontFamily: 'ProximaNova',
+        ),
+      ),
+      trailing: Container(
+        width: 50,
+        child: SvgPicture.network(
+          country.flag,
+          fit: BoxFit.contain,
+          height: 100,
         ),
       ),
     ),

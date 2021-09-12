@@ -26,6 +26,7 @@ class _CountriesViewState extends State<CountriesView> {
 
   @override
   Widget build(BuildContext context) {
+    Widget val;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -55,12 +56,14 @@ class _CountriesViewState extends State<CountriesView> {
                 else if (snapshot.hasData) return showRegions(countries);
                 break;
               case ConnectionState.waiting:
-                return Text(
+                val = Text(
                   "Loading...",
                 );
+                break;
               default:
-                return Container();
+                val = Container();
             }
+            return val;
           }),
     );
   }
@@ -88,16 +91,22 @@ Widget showRegions(List<Country> countries) {
 
 Widget showCard(BuildContext context, Country country) {
   return Card(
+    shadowColor: Colors.red,
+    semanticContainer: true,
+    clipBehavior: Clip.antiAliasWithSaveLayer,
     color: Colors.white,
     child: ListTile(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => BorderCountries(country.name)));
       },
-      trailing: SvgPicture.network(
-        country.flag,
-        height: 20,
-        width: 20,
+      trailing: Container(
+        width: 50,
+        child: SvgPicture.network(
+          country.flag,
+          fit: BoxFit.contain,
+          height: 100,
+        ),
       ),
       title: Text(
         country.name,
